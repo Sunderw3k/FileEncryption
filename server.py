@@ -13,6 +13,12 @@ class Values(BaseModel):
 	hash: str
 	key: Optional[str] = None
 
+def db_init():
+	db = sqlite3.connect("database.db")
+	cur = db.cursor()
+	cur.execute("CREATE TABLE IF NOT EXISTS files(name TEXT, content TEXT, hash TEXT, key TEXT)")
+	db.commit()
+
 @app.post("/save")
 def database(item: Values):
 	if item.key == None:
@@ -44,5 +50,5 @@ def check(item: Values):
 if __name__ == "__main__":
 	hostname = socket.gethostname()
 	ip = socket.gethostbyname(hostname)
-	print(ip)
+	db_init()
 	uvicorn.run("server:app", host=ip, reload=True)
