@@ -29,6 +29,8 @@ def main(path, password, ip):
 
     with open(path, "wb") as file:
         file.write(content)
+        
+    print("Succesfully decrypted!")
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
