@@ -23,7 +23,7 @@ def main(path, password, ip):
     content, key = encrypt(path)
 
 
-    r = requests.post("http://{ip}/save", json = {
+    r = requests.post(f"http://{ip}:8000/save", json = {
         "name": str(path),
         "content": str(hashlib.sha256(content).hexdigest()),
         "hash": str(hashlib.sha256(password.encode('UTF-8')).hexdigest()),
